@@ -1,21 +1,13 @@
-Wiring nRF24L01 to Arduino Uno:
+Arduino Uno (Transmitter) with RX470C-V01:
 
-VCC -> 3.3V
-GND -> GND
-CE -> Pin 9
-CSN -> Pin 10
-SCK -> Pin 13
-MOSI -> Pin 11
-MISO -> Pin 12
+VCC -> 5V (from Arduino)
+GND -> GND (from Arduino)
+Data Pin (Usually, this pin is the one used for transmitting) -> Use a digital pin, e.g., Pin 3
 
 
 
-Wiring nRF24L01 to ESP32:
+ESP32 (Receiver) with RX470C-V01:
 
-VCC -> 3.3V (use a stable 3.3V regulator if needed, as nRF24L01 is sensitive to power variations)
-GND -> GND
-CE -> GPIO 4 (or any free GPIO)
-CSN -> GPIO 5 (or any free GPIO)
-SCK -> GPIO 18
-MOSI -> GPIO 23
-MISO -> GPIO 19
+VCC -> 3.3V (from ESP32)
+GND -> GND (from ESP32)
+Data Pin -> Use a digital pin, e.g., Pin 22
