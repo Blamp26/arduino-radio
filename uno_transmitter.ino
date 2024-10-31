@@ -1,21 +1,18 @@
-#include <SPI.h>
-#include <nRF24L01.h>
-#include <RF24.h>
+#include <VirtualWire.h>  // Ensure you have the VirtualWire library
 
-RF24 radio(9, 10);  // CE, CSN
-
-const byte address[6] = "00001";
-char dataToSend[32] = "Hello ESP32";
+const int TX_PIN = 3;  // Pin connected to RX470C-V01 data pin
 
 void setup() {
-  Serial.begin(9600);
-  radio.begin();
-  radio.openWritingPipe(address);
-  radio.setPALevel(RF24_PA_LOW);
-  radio.stopListening();
+    Serial.begin(9600);
+    vw_set_tx_pin(TX_PIN);
+    vw_setup(2000);  // Bits per second
 }
 
 void loop() {
-  radio.write(&dataToSend, sizeof(dataToSend));
-  delay(1000);
+    const char *message = "Hello from Uno!";
+    
+    vw_send((uint8_t *)message, strlen(message));
+    vw_wait_tx();  // Wait until the message is sent
+    Serial.println("Sent: Hello from Uno!");
+    delay(1000);  // Send every second
 }
